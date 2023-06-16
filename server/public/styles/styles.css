@@ -1,0 +1,10 @@
+.active {
+    background-color: aquamarine;
+}
+
+input {
+    size: 20;
+}
+button {
+    padding: 10px;
+}

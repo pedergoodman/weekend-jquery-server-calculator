@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,22 @@
     <script src="vendors/jquery-3.7.0.js"></script>
     <script src="scripts/client.js"></script>
 </head>
+
 <body>
     <h1>Server Side Calculator</h1>
-    
+    <span id="calc-input-form">
+        <form action="">
+            <input type="number">
+            <button class="operation-btn" type="button" value="+">+</button>
+            <button class="operation-btn" type="button" value="-">-</button>
+            <button class="operation-btn" type="button" value="*">*</button>
+            <button class="operation-btn" type="button" value='/''>/</button>
+            <input type="number">
+            <button>=</button>
+            <button>C</button>
+
+        </form>
+    </span>
 </body>
+
 </html>
