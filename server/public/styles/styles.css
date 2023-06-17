@@ -5,6 +5,31 @@
 input {
     size: 20;
 }
+
 button {
     padding: 10px;
+}
+
+#calc-input-form,
+#display-total,
+#display-history {
+
+    display: flex;
+    justify-content: space-around;
+}
+
+#display-history li {
+    list-style-type: none;
+    letter-spacing: 6px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+ul {
+    margin: auto;
+    padding: 0px;
+}
+
+#display-total h2 {
+    text-align: center;
 }

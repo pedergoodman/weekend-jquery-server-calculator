@@ -14,16 +14,24 @@
     <h1>Server Side Calculator</h1>
     <span id="calc-input-form">
         <form action="">
-            <input type="number">
+            <input class="number-input first-number" type="number">
             <button class="operation-btn" type="button" value="+">+</button>
             <button class="operation-btn" type="button" value="-">-</button>
             <button class="operation-btn" type="button" value="*">*</button>
-            <button class="operation-btn" type="button" value='/''>/</button>
-            <input type="number">
-            <button>=</button>
-            <button>C</button>
-
+            <button class="operation-btn" type="button" value='/'>/</button>
+            <input class="number-input second-number" type="number">
+            <button id="submit-button" type="submit">=</button>
+            <button id="clear-inputs" type="button">C</button>
         </form>
+    </span>
+    <span  id="display-total">
+        <h2>Total is: <span id="total">3432</span></h2>
+    </span>
+    <span id="display-history">
+        <!-- history goes here -->
+        <ul>
+            <li>2+2=4</li>
+        </ul>
     </span>
 </body>
 

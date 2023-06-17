@@ -10,7 +10,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // GET, POST, DELETE routes go here!!
 
-// TODO post
+// TODO post route for input data
+
+app.post('/send-calc', (req, res) => {
+    console.log(res.body.calcInputData);
+    console.log(res.body.calcInputData.inputOne);
+    console.log(res.body.calcInputData.inputTwo);
+    console.log(res.body.calcInputData.chosenOperation);
+
+    res.sendStatus(201)
+})
 
 
 
@@ -18,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
-calculateNumbers(inputOne, inputTwo)
+// calculateNumbers(inputOne, inputTwo)
 function calculateNumbers(one, two) {
     switch (operationButton) {
      case '+':

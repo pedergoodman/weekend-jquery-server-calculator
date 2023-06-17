@@ -1,6 +1,3 @@
-const { log } = require("console");
-const { response } = require("express");
-
 $(document).ready(onReady);
 
 let chosenOperation = '';
@@ -13,13 +10,15 @@ function onReady() {
 
 
     // button listeners!
+    $('#clear-inputs').on('click', resetInputs)
+    $('#submit-button').on('click', postCalculation)
+
 
     // "radio" button listener
     $('.operation-btn').on('click', selectOperationButton)
-    $('#clear-inputs').on('click', resetInputs)
-    $('#submit-button').on('click', postCalculation)
 }
 
+// clicking "c" clears selected operator and input fields
 function resetInputs() {
     $('.operation-btn').removeClass('active')
     chosenOperation = ''
@@ -27,22 +26,26 @@ function resetInputs() {
     // console.log('operation is:',chosenOperation);
 }
 
+// toggles selected operation
+// both value to be passed & highligh on DOM
 function selectOperationButton() {
     chosenOperation = $(this).val()
-    // console.log('operation is:',chosenOperation);
+    console.log('operation is:',chosenOperation);
     
     $('.operation-btn').removeClass('active')
     $(this).addClass('active')
 }
 
-function postCalculation() {
+// sends submitted calculation and operator to server.
+function postCalculation(event) {
+    event.preventDefault()
     // captured inputs 
     let inputOne = $('.first-number').val();
     let inputTwo = $('.second-number').val();
     console.log('inputOne is:', inputOne);
     console.log('inputTwo is:', inputTwo);
+    console.log('chosenOperation is:', chosenOperation);
 
-    // POST route to server, 
     // package 2 numbers & chosen math operation
     $.ajax({
         method: 'POST',
@@ -66,8 +69,4 @@ function postCalculation() {
 
 }
 
-
-
-
-
-// move to server later
+// TO
