@@ -10,10 +10,37 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // GET, POST, DELETE routes go here!!
 
+// TODO post
 
 
 
 // Functions and Server side logic goes here!
+
+
+
+calculateNumbers(inputOne, inputTwo)
+function calculateNumbers(one, two) {
+    switch (operationButton) {
+     case '+':
+         // what to do if +
+         break;
+     case '-':
+        // what to do if -
+         break;
+     case '*':
+         // what to do if *
+         break;
+     case '/':
+        // what to do if /
+         break;
+     default:
+        // should I send a error here?
+         break;
+    }
+     
+ }
+
+// how do I package the data?
 
 
 
