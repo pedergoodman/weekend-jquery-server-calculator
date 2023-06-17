@@ -3,13 +3,13 @@
 let calcHistory = [
   {
     inputOne: 4,
-    InputTwo: 5,
+    inputTwo: 5,
     operator: '+',
     calcString: '4+5=9'
   },
   {
     inputOne: 6,
-    InputTwo: 9,
+    inputTwo: 9,
     operator: '*',
     calcString: '6+9=54'
   }

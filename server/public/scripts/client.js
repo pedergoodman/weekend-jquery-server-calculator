@@ -42,9 +42,9 @@ function postCalculation(event) {
     // captured inputs 
     let inputOne = $('.first-number').val();
     let inputTwo = $('.second-number').val();
-    console.log('inputOne is:', inputOne);
-    console.log('inputTwo is:', inputTwo);
-    console.log('chosenOperation is:', chosenOperation);
+    // console.log('inputOne is:', inputOne);
+    // console.log('inputTwo is:', inputTwo);
+    // console.log('chosenOperation is:', chosenOperation);
 
     // package 2 numbers & chosen math operation
     $.ajax({
@@ -54,12 +54,14 @@ function postCalculation(event) {
             calcInputData: {
                 inputOne: inputOne,
                 inputTwo: inputTwo,
-                mathOperation: chosenOperation
+                chosenOperation: chosenOperation
             }
         }
     }).then((response) => {
         console.log('Post Successful');
         // TODO render data to DOM
+
+        // renderHistory()
 
     }).catch((alert) => {
         alert("Data wasn't sent to Server.");
