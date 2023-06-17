@@ -7,6 +7,11 @@ const PORT = 5000;
 app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Global variables
+const calcHistory = require('./modules/history')
+
+
+
 // GET, POST, DELETE routes go here!!
 
 // POST route for input data
@@ -27,9 +32,7 @@ app.post('/send-calc', (req, res) => {
 
 
 
-// Functions and Server side logic goes here!
-
-
+// Server side logic goes here!
 
 // calculateNumbers(inputOne, inputTwo)
 function calculateNumbers(one, two, operation) {
@@ -89,14 +92,17 @@ function calculateNumbers(one, two, operation) {
 
         default:
             // should I send a error here?
+            // can I require operation selection on submission?
             console.log('no operator selected');
+            packageCalculation.calcString = 'No operator selected'
             break;
     }
 
     // unshift object to array
+    calcHistory.unshift(packageCalculation);
 
-
-    console.log('packageCalculation is:', packageCalculation);
+    console.log(calcHistory);
+    // console.log('packageCalculation is:', packageCalculation);
 }
 
 // how do I package the data?

@@ -6,7 +6,7 @@ function onReady() {
     console.log('jQuery loaded');
 
     // needed if we start at 0 calcs?
-    // getHistory()
+    getHistory()
 
 
     // button listeners!
@@ -59,9 +59,10 @@ function postCalculation(event) {
         }
     }).then((response) => {
         console.log('Post Successful');
-        // TODO render data to DOM
 
-        // renderHistory()
+        // send to getHistory
+        getHistory()
+
 
     }).catch((alert) => {
         alert("Data wasn't sent to Server.");
@@ -71,4 +72,6 @@ function postCalculation(event) {
 
 }
 
-// TO
+function getHistory() {
+    
+}
