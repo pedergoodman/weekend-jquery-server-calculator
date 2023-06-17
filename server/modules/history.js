@@ -1,7 +1,7 @@
 // calculation history array
 
 let calcHistory = [
-
+  
 ]
 
 

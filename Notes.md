@@ -18,6 +18,10 @@
 
 
 
+## missing details
+no sumbission if operator isn't selected
+clear "total" on page refresh, but keep history
+
 
 
 

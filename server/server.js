@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Global variables
 const calcHistory = require('./modules/history')
-
+let lastCalc = '';
 
 
 // GET, POST, DELETE routes go here!!
@@ -32,7 +32,15 @@ app.post('/send-calc', (req, res) => {
 app.get('/calc-history', (req, res) => {
     console.log('GetHistory request made.');
 
-    res.send(calcHistory);
+    let package = {
+        history: calcHistory,
+        lastCalc: lastCalc
+        }
+    console.log('sending last calc:', lastCalc);
+    
+    res.send(package);
+    lastCalc =''
+    console.log('sent last calc, should clear:', lastCalc);
 })
 
 
@@ -46,7 +54,6 @@ function calculateNumbers(one, two, operation) {
     // console.log('inputTwo is:', two);
     // console.log('operation is:', operation);
     let operator = operation;
-    let result;
     
 
     let packageCalculation = {
@@ -56,6 +63,8 @@ function calculateNumbers(one, two, operation) {
         calcString: '',
         result: 0,
     }
+
+    // grabs inputs and places in array object
     packageCalculation.inputOne = one;
     packageCalculation.inputTwo = two;
     packageCalculation.operator = operation;
@@ -65,34 +74,35 @@ function calculateNumbers(one, two, operation) {
         case '+':
             // what to do if +
             // add numbers
-            result = one + two
+            lastCalc = one + two
             // package into object
-            packageCalculation.result = result;
-            packageCalculation.calcString = `${one} + ${two} = ${result}`
+            packageCalculation.result = lastCalc;
+            packageCalculation.calcString = `${one} + ${two} = ${lastCalc}`
+            
             break;
 
         case '-':
             // what to do if -
-            result = one - two
+            lastCalc = one - two
             // package into object
-            packageCalculation.result = result;
-            packageCalculation.calcString = `${one} - ${two} = ${result}`
+            packageCalculation.result = lastCalc;
+            packageCalculation.calcString = `${one} - ${two} = ${lastCalc}`
             break;
 
         case '*':
             // what to do if *
-            result = one * two
+            lastCalc = one * two
             // package into object
-            packageCalculation.result = result;
-            packageCalculation.calcString = `${one} * ${two} = ${result}`
+            packageCalculation.result = lastCalc;
+            packageCalculation.calcString = `${one} * ${two} = ${lastCalc}`
             break;
 
         case '/':
             // what to do if /
-            result = one * two
+            lastCalc = one / two
             // package into object
-            packageCalculation.result = result;
-            packageCalculation.calcString = `${one} / ${two} = ${result}`
+            packageCalculation.result = lastCalc;
+            packageCalculation.calcString = `${one} / ${two} = ${lastCalc}`
             break;
 
         default:
@@ -106,7 +116,6 @@ function calculateNumbers(one, two, operation) {
     // unshift object to array
     calcHistory.unshift(packageCalculation);
 
-    calcHistory
     // console.log('packageCalculation is:', packageCalculation);
 }
 

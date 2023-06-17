@@ -15,17 +15,19 @@
     <span id="calc-input-form">
         <form action="">
             <input class="number-input first-number" type="number">
-            <button class="operation-btn" type="button" value="+">+</button>
-            <button class="operation-btn" type="button" value="-">-</button>
-            <button class="operation-btn" type="button" value="*">*</button>
-            <button class="operation-btn" type="button" value='/'>/</button>
+            <div id="operations-group">
+                <button class="operation-btn" type="button" value="+">+</button>
+                <button class="operation-btn" type="button" value="-">-</button>
+                <button class="operation-btn" type="button" value="*">*</button>
+                <button class="operation-btn" type="button" value='/'>/</button>
+            </div>
             <input class="number-input second-number" type="number">
             <button id="submit-button" type="submit">=</button>
             <button id="clear-inputs" type="button">C</button>
         </form>
     </span>
     <span  id="display-total">
-        <h2>Total is: <span id="total">3432</span></h2>
+        <h2 id="total"></h2>
     </span>
     <span id="display-history">
         <ul>
