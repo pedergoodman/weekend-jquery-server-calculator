@@ -13,7 +13,6 @@ const calcHistory = require('./modules/history')
 
 
 // GET, POST, DELETE routes go here!!
-
 // POST route for input data
 app.post('/send-calc', (req, res) => {
     // console.log(req.body.calcInputData);
@@ -30,6 +29,11 @@ app.post('/send-calc', (req, res) => {
     res.sendStatus(201)
 })
 
+app.get('/calc-history', (req, res) => {
+    console.log('GetHistory request made.');
+
+    res.send(calcHistory);
+})
 
 
 // Server side logic goes here!
@@ -56,6 +60,7 @@ function calculateNumbers(one, two, operation) {
     packageCalculation.inputTwo = two;
     packageCalculation.operator = operation;
 
+    // switch calculation dependent on chosenOperation
     switch (operator) {
         case '+':
             // what to do if +
@@ -63,7 +68,7 @@ function calculateNumbers(one, two, operation) {
             result = one + two
             // package into object
             packageCalculation.result = result;
-            packageCalculation.calcString = `${one}+${two}=${result}`
+            packageCalculation.calcString = `${one} + ${two} = ${result}`
             break;
 
         case '-':
@@ -71,7 +76,7 @@ function calculateNumbers(one, two, operation) {
             result = one - two
             // package into object
             packageCalculation.result = result;
-            packageCalculation.calcString = `${one}-${two}=${result}`
+            packageCalculation.calcString = `${one} - ${two} = ${result}`
             break;
 
         case '*':
@@ -79,7 +84,7 @@ function calculateNumbers(one, two, operation) {
             result = one * two
             // package into object
             packageCalculation.result = result;
-            packageCalculation.calcString = `${one}*${two}=${result}`
+            packageCalculation.calcString = `${one} * ${two} = ${result}`
             break;
 
         case '/':
@@ -87,7 +92,7 @@ function calculateNumbers(one, two, operation) {
             result = one * two
             // package into object
             packageCalculation.result = result;
-            packageCalculation.calcString = `${one}/${two}=${result}`
+            packageCalculation.calcString = `${one} / ${two} = ${result}`
             break;
 
         default:
@@ -101,11 +106,11 @@ function calculateNumbers(one, two, operation) {
     // unshift object to array
     calcHistory.unshift(packageCalculation);
 
-    console.log(calcHistory);
+    calcHistory
     // console.log('packageCalculation is:', packageCalculation);
 }
 
-// how do I package the data?
+
 
 
 

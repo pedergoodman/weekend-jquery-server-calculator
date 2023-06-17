@@ -7,7 +7,7 @@ function onReady() {
 
     // needed if we start at 0 calcs?
     getHistory()
-
+    clearResult()
 
     // button listeners!
     $('#clear-inputs').on('click', resetInputs)
@@ -73,5 +73,43 @@ function postCalculation(event) {
 }
 
 function getHistory() {
+    $.ajax({
+        method: 'GET',
+        url: '/calc-history'
+    }).then((response) => {
+        console.log('response is:', response);
+
+        renderHistory(response)
+
+
+    }).catch((error) => {
+        alert('History was not found');
+        console.log('getHistory error is:', error);
+    })
+}
+
+function renderHistory(response) {
+    // console.log(response);
+    console.log('in renderHistory!');
+
+    // console.log(response[0].result);
+    // updates latest result
+    $('#total').text(response[0].result)
+    
+    $('#display-history ul').empty()
+
+    // renders calcHistory to DOM
+    for (const historyObject of response) {
+
+        // console.log(historyObject.calcString);
+        $('#display-history ul').append(`
+            <li>${historyObject.calcString}</li>
+        `)
+    }
+
+    // would like to attach n1 & n2 to each line
+    // for later calculation
+
+
     
 }

@@ -20,7 +20,7 @@ button {
 
 #display-history li {
     list-style-type: none;
-    letter-spacing: 6px;
+    /* letter-spacing: 6px; */
     font-size: 20px;
     font-weight: bold;
 }
