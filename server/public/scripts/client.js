@@ -1,33 +1,56 @@
 $(document).ready(onReady);
 
 let chosenOperation = '';
+let inputOne = '';
+let inputTwo = '';
+let inputConcat = '';
 
 function onReady() {
     console.log('jQuery loaded');
 
-    // needed if we start at 0 calcs?
+    // loads history onto page 
     getHistory()
 
-    resetInputs()
-
     // button listeners!
-    $('#clear-inputs').on('click', resetInputs)
+    $('.inputs').on('click', resetInputs)
     $('#submit-button').on('click', postCalculation)
+    $('.number-btn').on('click', addToInput)
 
-
+    
     // "radio" button listener
     $('.operation-btn').on('click', selectOperationButton)
+
+
+    $('.history-list').on('click', checkValues)
 }
 
 // clicking "c" clears selected operator and input fields
 function resetInputs() {
+    // deselects and clears value of chosenOperation
     $('.operation-btn').removeClass('active')
     chosenOperation = ''
+    // clears number input value
     $('.number-input').val('')
+    // clears calculated total
     $('#total').text('')
-    $('#operations-group').removeClass('not-selected')
+    // 
+    // $('#operations-group').removeClass('not-selected')
     // console.log('operation is:',chosenOperation);
 }
+
+// TODO - all clear function 
+
+// TODO
+function addToInput() {
+    // 
+}
+
+function checkValues() {
+    console.log('list item clicked!');
+    console.log($(this).data('saveOperation'));
+}
+
+
 
 // toggles selected operation
 // both value to be passed & highligh on DOM
@@ -39,8 +62,6 @@ function selectOperationButton() {
     $('.operation-btn').removeClass('active')
     $(this).addClass('active')
 }
-
-
 
 
 
@@ -75,9 +96,8 @@ function postCalculation(event) {
         }).then((response) => {
             console.log('Post Successful');
 
-            // send to getHistory
+            // loads history onto page 
             getHistory()
-
 
         }).catch((alert) => {
             alert("Data wasn't sent to Server.");
@@ -93,10 +113,8 @@ function getHistory() {
         url: '/calc-history'
     }).then((response) => {
         console.log('response is:', response);
-
         // send to render history
         renderHistory(response)
-
     }).catch((error) => {
         alert('History was not found');
         console.log('getHistory error is:', error);
@@ -109,21 +127,28 @@ function renderHistory(response) {
     console.log('history is:', response.history);
     console.log('response.length is:', response.history.length);
 
-    // If the calcHistory array is not empty, 
-    // append latest total
+    // displays latest calc on DOM
+    // runs only if there is history
     if (response.history.length > 0) {
         $('#total').text(response.lastCalc)
     }
 
-
+    // clears history display
     $('#display-history ul').empty()
 
     // renders calcHistory to DOM
     for (const historyObject of response.history) {
         // console.log(historyObject.calcString);
         $('#display-history ul').append(`
-            <li>${historyObject.calcString}</li>
+            <li class="history-list">${historyObject.calcString}</li>
         `)
+        // testing right now, should store operation in the DOM element
+        // also will attach it every time the page refreshes!
+        $('#display-history li').last().data('saveOperation', {
+            inputOne: historyObject.inputOne,
+            inputTwo: historyObject.inputTwo,
+            operator: historyObject.operator
+        })
     }
 
     // would like to attach n1 & n2 to each line

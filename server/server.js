@@ -36,11 +36,11 @@ app.get('/calc-history', (req, res) => {
         history: calcHistory,
         lastCalc: lastCalc
         }
-    console.log('sending last calc:', lastCalc);
+    // console.log('sending last calc:', lastCalc);
     
     res.send(package);
     lastCalc =''
-    console.log('sent last calc, should clear:', lastCalc);
+    // console.log('sent last calc, should clear:', lastCalc);
 })
 
 
@@ -49,7 +49,7 @@ app.get('/calc-history', (req, res) => {
 // calculateNumbers(inputOne, inputTwo)
 function calculateNumbers(one, two, operation) {
 
-    console.log('made it to calculateNumbers!');
+    // console.log('made it to calculateNumbers!');
     // console.log('inputOne is:', one);
     // console.log('inputTwo is:', two);
     // console.log('operation is:', operation);
