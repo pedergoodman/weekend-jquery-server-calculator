@@ -7,7 +7,7 @@ function onReady() {
 
     // needed if we start at 0 calcs?
     getHistory()
-    
+
     resetInputs()
 
     // button listeners!
@@ -35,20 +35,26 @@ function selectOperationButton() {
     $('#operations-group').removeClass('not-selected')
     chosenOperation = $(this).val()
     // console.log('operation is:',chosenOperation);
-    
+
     $('.operation-btn').removeClass('active')
     $(this).addClass('active')
 }
 
+
+
+
+
+// GET & POST routes
+
 // sends submitted calculation and operator to server.
 function postCalculation(event) {
     event.preventDefault()
-    
+
     if (chosenOperation === '') {
         $('#operations-group').addClass('not-selected')
         console.log('Please select operator');
-    } else { 
-    // captured inputs 
+    } else {
+        // captured inputs 
         let inputOne = $('.first-number').val();
         let inputTwo = $('.second-number').val();
         // console.log('inputOne is:', inputOne);
@@ -107,8 +113,8 @@ function renderHistory(response) {
     // append latest total
     if (response.history.length > 0) {
         $('#total').text(response.lastCalc)
-    } 
-    
+    }
+
 
     $('#display-history ul').empty()
 
@@ -122,8 +128,6 @@ function renderHistory(response) {
 
     // would like to attach n1 & n2 to each line
     // for later calculation
-
-
     
 }
 

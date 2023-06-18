@@ -1,26 +1,86 @@
-root {
-    --text: #0c0409;
-    --background: #f3d8e9;
-    --primary-button: #35b162;
-    --secondary-button: #faeff6;
-    --accent: #1d6237;
+:root {
+    --color-four: #ade1c5;
+    --all-clear-hover: #e0a9c6;
+    
+    
+    --background: #fbefdb;
+    --submit: #3b9938;
+    --submit-hover: #7fbf7d;
+    --button-click: #446269;
+    --all-clear: #ad383c;
+    --all-clear-hover: #df5357;
+    --hover: #c3d7f8;
+    /* --hover: #f8e5c4; */
+}
+
+body{
+    background-color: var(--background);
+}
+
+h1 {
+    text-align: center;
 }
 
 
 
-.active {
-    background-color: #1d6237;
+/* BUTTON INTERACTION */
+
+/* selected operator */
+.active, .active:hover {
+    background-color: var(--button-click);
 }
 
+/* general buttons */
+button:hover {
+    background-color: var(--hover);
+}
+.number-btn:active {
+    background-color: var(--button-click);
+    color: var(--background);
+}
+
+/* clear all button */
+.all:hover {
+    background-color: var(--all-clear-hover);
+}
+.all:active {
+    background-color: var(--all-clear);
+}
+
+/* submit button */
+#submit-button:hover, .inputs:hover {
+    background-color: var(--submit-hover);
+}
+#submit-button:active, .inputs:active {
+    background-color: var(--submit);
+}
+
+/* styling an sizing */
 input {
-    size: 20;
+    font-size: 16px;
+    padding-left: 6px;
+    height: 60px;
+    border-radius: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
 }
 
 button {
-    padding: 12px;
-    margin: 3px;
+    padding: 7px;
+    margin: 2px;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
 }
 
+button.operation-btn {
+    width: 120px;
+    border-radius: 30px;
+}
+
+/* might need to adjust these */
 #calc-input-form,
 #display-total,
 #display-history {
@@ -36,15 +96,18 @@ button {
     font-weight: bold;
 }
 
+
 ul {
     margin: auto;
     padding: 0px;
 }
 
+targets returned calculation total
 #total {
     text-align: center;
 }
 
+/* changing this formatting */
 #operations-group {
     display: inline;
     padding: 20px 10px 20px 10px;

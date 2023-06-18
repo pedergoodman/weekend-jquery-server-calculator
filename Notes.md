@@ -19,9 +19,11 @@
 
 
 ## missing details
-no sumbission if operator isn't selected
-clear "total" on page refresh, but keep history
+[x] no submission if operator isn't selected
+[x] clear "total" on page refresh, but keep history
 
+round division to nearest 2nd decimal
+add commas to strings
 
 
 

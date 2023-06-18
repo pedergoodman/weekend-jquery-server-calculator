@@ -12,28 +12,48 @@
 
 <body>
     <h1>Server Side Calculator</h1>
-    <span id="calc-input-form">
+    <div id="calc-input-form">
         <form action="">
-            <input class="number-input first-number" type="number">
-            <div id="operations-group">
+            <input class="number-input first-number" type="number" placeholder="input1">
+            <div class="calc-block first-row">
+                <input class="number-input second-number" type="number" placeholder="input2">
+                <button class="clear-btn all" type="button">AC</button>
+                <button class="clear-btn inputs" type="button">C</button>
+            </div>
+            <div class="calc-block second-row">
+                <button class="number-btn" type="button" value="7">7</button>
+                <button class="number-btn" type="button" value="8">8</button>
+                <button class="number-btn" type="button" value="9">9</button>
                 <button class="operation-btn" type="button" value="+">+</button>
+            </div>
+            <div class="calc-block third-row">
+                <button class="number-btn" type="button" value="4">4</button>
+                <button class="number-btn" type="button" value="5">5</button>
+                <button class="number-btn" type="button" value="6">6</button>
                 <button class="operation-btn" type="button" value="-">-</button>
+            </div>
+            <div class="calc-block forth-row">
+                <button class="number-btn" type="button" value="1">1</button>
+                <button class="number-btn" type="button" value="2">2</button>
+                <button class="number-btn" type="button" value="3">3</button>
                 <button class="operation-btn" type="button" value="*">*</button>
+            </div>
+            <div class="calc-block fifth-row">
+                <button class="number-btn" type="button" value="0">0</button>
+                <button class="number-btn" type="button" value=".">.</button>
+                <button id="submit-button" type="submit">=</button>
                 <button class="operation-btn" type="button" value='/'>/</button>
             </div>
-            <input class="number-input second-number" type="number">
-            <button id="submit-button" type="submit">=</button>
-            <button id="clear-inputs" type="button">C</button>
         </form>
-    </span>
-    <span  id="display-total">
+    </div>
+    <div  id="display-total">
         <h2 id="total"></h2>
-    </span>
-    <span id="display-history">
+    </div>
+    <div id="display-history">
         <ul>
             <!-- history will populate here -->
         </ul>
-    </span>
+    </div>
 </body>
 
 </html>
