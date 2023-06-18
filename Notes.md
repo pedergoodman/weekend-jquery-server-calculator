@@ -33,9 +33,10 @@ add commas to strings
 - [x] get value to display properly
   - needed the input to be a text box 🤦🏻‍♂️
 
-relink border / drop shadow highlight on button
-- highlight operators if not selected
-- highlight numbers if second operand not inputted
+- [x] relink border / drop shadow highlight on button
+- [x] highlight operators if not selected
+- [x] highlight numbers if second operand not inputted
+- [x] flash?
 
 create AC button function DELETE
 - [ ] AJAX delete client side

@@ -34,7 +34,7 @@ h1 {
 button:hover {
     background-color: var(--hover);
 }
-.number-btn:active {
+button:active {
     background-color: var(--button-click);
     color: var(--background);
 }
@@ -53,7 +53,29 @@ button:hover {
 }
 #submit-button:active, .clear-inputs:active {
     background-color: var(--submit);
+    transition: all 0s;
 }
+
+/* button warnings */
+.operation-btn {
+    width: 120px;
+    border-radius: 30px;
+    transition: box-shadow 1600ms ease-in-out;
+}
+
+.number-btn {
+    transition: box-shadow 1600ms ease-in-out;
+}
+
+.not-selected {
+    border: 2px transparent;
+    box-shadow: inset 0px 0px 10px 0px red;
+    transition: all ;
+}
+.history-list:hover {
+    cursor: pointer;
+}
+
 
 /* styling an sizing */
 input {
@@ -75,16 +97,10 @@ button {
     border-radius: 50%;
 }
 
-button.operation-btn {
-    width: 120px;
-    border-radius: 30px;
-}
-
-/* might need to adjust these */
+/* top level div groups */
 #calc-input-form,
 #display-total,
 #display-history {
-
     display: flex;
     justify-content: space-around;
 }
@@ -94,8 +110,8 @@ button.operation-btn {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
+    margin: 6px;
 }
-
 
 ul {
     margin: auto;
@@ -107,12 +123,3 @@ ul {
     text-align: center;
 }
 
-/* changing this formatting */
-/* .operation-btn {
-    display: inline;
-    padding: 20px 10px 20px 10px;
-} */
-
-.not-selected .operation-btn {
-    border: 2px solid red 
-}

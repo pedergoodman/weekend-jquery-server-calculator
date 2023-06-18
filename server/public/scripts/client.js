@@ -1,4 +1,4 @@
-$(document).ready(onReady);
+    $(document).ready(onReady);
 
 let chosenOperation = '';
 let inputOne = '';
@@ -22,7 +22,7 @@ function onReady() {
     $('.operation-btn').on('click', selectOperationButton)
 
     // TODO access history data (hopefully)
-    $('.history-list').on('click', checkValues)
+    $('#display-history').on('click', '.history-list', checkValues)
 }
 
 // clicking "c" clears selected operator and input fields
@@ -81,33 +81,50 @@ function checkValues() {
 // toggles selected operation
 // both value to be passed & highligh on DOM
 function selectOperationButton() {
-    $('#operations-group').removeClass('not-selected')
+    $('.operation-btn').removeClass('not-selected')
     chosenOperation = $(this).val()
     console.log('operation is:', chosenOperation);
 
+    // old functionality, keeps selected operation highlighted
     // $('.operation-btn').removeClass('active')
     // $(this).addClass('active')
 
-    inputConcat = inputOne + chosenOperation;
+    inputConcat = inputOne + chosenOperation + inputTwo;
     $('.number-input').val(inputConcat);
 }
 
 
 
 // GET & POST routes
+function checkReadyToCalculate() {
+    if (chosenOperation === '') {
+        // flash operation buttons
+        $('.operation-btn').addClass('not-selected')
+        setTimeout( () => {
+            $('.operation-btn').removeClass('not-selected')
+        }, "100")
+        // console.log('Please select operator');
+        return false;
+    } else if (inputTwo === '') {
+        $('.number-btn').addClass('not-selected')
+        setTimeout( () => {
+            $('.number-btn').removeClass('not-selected')
+        }, "100")
+        console.log('Please select second operand');
+        return false;
+    } else {
+        return true;
+    }
+    
+}
+
 
 // sends submitted calculation and operator to server.
 function postCalculation(event) {
     event.preventDefault()
 
-    if (chosenOperation === '') {
-        $('.operation-btn').addClass('not-selected')
-        console.log('Please select operator');
-    } else if (inputTwo === '') {
-        $('.number-btn').addClass('not-selected')
-        console.log('Please select second operand');
-    } else {
-        // old captured inputs and tests 
+     if (checkReadyToCalculate()) {
+        // tests & old captured inputs 
         // let inputOne = $('.first-number').val();
         // let inputTwo = $('.second-number').val();
 
