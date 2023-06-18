@@ -27,3 +27,13 @@ add commas to strings
 
 
 
+
+# remaining todos
+
+get value to display properly
+
+relink border / drop shadow highlight on button
+
+create AC button function DELETE
+
+click on an old calculation and run it again

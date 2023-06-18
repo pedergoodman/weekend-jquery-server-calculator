@@ -183,6 +183,7 @@ function renderHistory(response) {
 
 }
 
+// TODO delete history
 function deleteHistory() {
     resetInputs()
 
