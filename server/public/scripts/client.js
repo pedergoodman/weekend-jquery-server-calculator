@@ -1,4 +1,4 @@
-    $(document).ready(onReady);
+$(document).ready(onReady);
 
 let chosenOperation = '';
 let inputOne = '';
@@ -130,14 +130,14 @@ function checkReadyToCalculate() {
     if (chosenOperation === '') {
         // flash operation buttons
         $('.operation-btn').addClass('not-selected')
-        setTimeout( () => {
+        setTimeout(() => {
             $('.operation-btn').removeClass('not-selected')
         }, "100")
         // console.log('Please select operator');
         return false;
     } else if (inputTwo === '') {
         $('.number-btn').addClass('not-selected')
-        setTimeout( () => {
+        setTimeout(() => {
             $('.number-btn').removeClass('not-selected')
         }, "100")
         console.log('Please select second operand');
@@ -145,7 +145,7 @@ function checkReadyToCalculate() {
     } else {
         return true;
     }
-    
+
 }
 
 
@@ -153,7 +153,7 @@ function checkReadyToCalculate() {
 function postCalculation(event) {
     event.preventDefault()
 
-     if (checkReadyToCalculate()) {
+    if (checkReadyToCalculate()) {
         // tests & old captured inputs 
         // let inputOne = $('.first-number').val();
         // let inputTwo = $('.second-number').val();
@@ -187,7 +187,7 @@ function postCalculation(event) {
         })
     }
 
-    
+
 
 }
 
@@ -239,19 +239,19 @@ function renderHistory(response) {
 
 // TODO delete history
 function deleteHistory() {
-    
+
     // TODO AJAX delete history
     $.ajax({
         method: 'DELETE',
         url: '/clear-history'
     }).then((response) => {
-        
+
         getHistory()
         clearInputs()
-        
+
     }).catch((error) => {
         alert('History is still here....')
         console.log('deleteHistory error is:', error);
     })
-    
+
 }
