@@ -28,12 +28,21 @@ add commas to strings
 
 
 
-# remaining todos
+# remaining todo's
 
-get value to display properly
+- [x] get value to display properly
+  - needed the input to be a text box 🤦🏻‍♂️
 
 relink border / drop shadow highlight on button
+- highlight operators if not selected
+- highlight numbers if second operand not inputted
 
 create AC button function DELETE
+- [ ] AJAX delete client side
+- [ ] AJAx delete server side
+- [ ] logic to clear history
 
 click on an old calculation and run it again
+- [ ] get click functionality working
+- [ ] nab values
+- [ ] send to calculation

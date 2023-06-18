@@ -102,17 +102,17 @@ ul {
     padding: 0px;
 }
 
-targets returned calculation total
+/* calculation total */
 #total {
     text-align: center;
 }
 
 /* changing this formatting */
-#operations-group {
+/* .operation-btn {
     display: inline;
     padding: 20px 10px 20px 10px;
-}
+} */
 
-.not-selected button {
+.not-selected .operation-btn {
     border: 2px solid red 
 }

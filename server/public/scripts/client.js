@@ -54,6 +54,7 @@ function addToInput() {
     } else {
         // else add to input1
         inputOne += $(this).val();
+        inputConcat = inputOne + chosenOperation;
     }
 
     console.log('building string');
@@ -63,6 +64,7 @@ function addToInput() {
     console.log('inputConcat:', inputConcat);
 
 
+    // console.log($('.number-input').val(''));
     // TODO why wont this append right!
     $('.number-input').val(inputConcat);
 
@@ -85,6 +87,9 @@ function selectOperationButton() {
 
     // $('.operation-btn').removeClass('active')
     // $(this).addClass('active')
+
+    inputConcat = inputOne + chosenOperation;
+    $('.number-input').val(inputConcat);
 }
 
 
@@ -96,8 +101,11 @@ function postCalculation(event) {
     event.preventDefault()
 
     if (chosenOperation === '') {
-        $('#operations-group').addClass('not-selected')
+        $('.operation-btn').addClass('not-selected')
         console.log('Please select operator');
+    } else if (inputTwo === '') {
+        $('.number-btn').addClass('not-selected')
+        console.log('Please select second operand');
     } else {
         // old captured inputs and tests 
         // let inputOne = $('.first-number').val();
