@@ -44,6 +44,6 @@ create AC button function DELETE
 - [ ] logic to clear history
 
 click on an old calculation and run it again
-- [ ] get click functionality working
-- [ ] nab values
+- [x] get click functionality working
+- [x] nab values
 - [ ] send to calculation
