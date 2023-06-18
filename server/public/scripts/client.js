@@ -205,37 +205,53 @@ function getHistory() {
     })
 }
 
+function buildResultString(response) {
+    
+
+    
+    return `${response.inputOne} ${response.operator} ${response.inputTwo} = ${stringifyNumber(response.result)}`
+}
+
+function stringifyNumber(num) {
+    console.log('stringifyNumber is:', num);
+
+    return Number(num).toFixed(3).replace(/\.?0+$/, '');
+}
+
 function renderHistory(response) {
     // console.log(response);
     console.log('in renderHistory!');
     console.log('history is:', response.history);
+    console.log('lastCalculation is:', response.lastCalculation);
     console.log('response.length is:', response.history.length);
+    
 
+    // \.0+$/, ''
     // displays latest calc on DOM
     // runs only if there is history
-    if (response.history.length > 0) {
-        $('#total').text(response.lastCalc)
-    }
+    if (response.history.length > 0 && response.lastCalculation) {
+        $('#total').text(stringifyNumber(response.lastCalculation));
+    };
 
     // clears history display
-    $('#display-history ul').empty()
+    $('#display-history ul').empty();
 
     // renders calcHistory to DOM
     for (const historyObject of response.history) {
         // console.log(historyObject.calcString);
         $('#display-history ul').append(`
-            <li class="history-list">${historyObject.calcString}</li>
-        `)
+            <li class="history-list">${buildResultString(historyObject)}</li>
+        `);
         // testing right now, should store operation in the DOM element
         // also will attach it every time the page refreshes!
         $('#display-history li').last().data('saveOperation', {
             inputOne: historyObject.inputOne,
             inputTwo: historyObject.inputTwo,
             operator: historyObject.operator
-        })
+        });
     }
 
-}
+};
 
 // TODO delete history
 function deleteHistory() {
@@ -254,4 +270,4 @@ function deleteHistory() {
         console.log('deleteHistory error is:', error);
     })
 
-}
+};

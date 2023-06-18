@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Global variables
 const calcHistory = require('./modules/history')
-let lastCalc = '';
+let lastCalculation = '';
 
 
 // GET, POST, DELETE routes go here!!
@@ -30,20 +30,22 @@ app.post('/send-calc', (req, res) => {
 })
 
 app.get('/calc-history', (req, res) => {
-    console.log('GetHistory request made.');
+     console.log('GetHistory request made.');
 
     let package = {
         history: calcHistory,
-        lastCalc: lastCalc
+        lastCalculation: lastCalculation
     }
-    // console.log('sending last calc:', lastCalc);
+    console.log('sending last calc:', lastCalculation);
 
     res.send(package);
     // reset lastCalc
-    lastCalc = ''
+    lastCalculation = '';
     // console.log('sent last calc, should clear:', lastCalc);
 })
 
+
+// clear
 app.delete('/clear-history', (req, res) => {
     console.log('delete request made!');
 
@@ -65,8 +67,8 @@ function calculateNumbers(one, two, operation) {
     console.log('inputOne is:', one);
     console.log('inputTwo is:', two);
     console.log('operation is:', operation);
+    
     let operator = operation;
-    let result;
 
 
     let packageCalculation = {
@@ -86,59 +88,43 @@ function calculateNumbers(one, two, operation) {
     switch (operator) {
         case '+':
             // what to do if +
-            // add numbers
-            result = one + two
-            // package into object
-            packageCalculation.result = result;
-            packageCalculation.calcString = `${one} + ${two} = ${result}`
-
+            lastCalculation = one + two;
+            
             break;
 
         case '-':
             // what to do if -
-            result = one - two
-            // package into object
-            packageCalculation.result = result;
-            packageCalculation.calcString = `${one} - ${two} = ${result}`
+            lastCalculation = one - two
+
             break;
 
         case '*':
             // what to do if *
-            result = one * two
+            lastCalculation = one * two
 
-            console.log('multiplication result is:', result);
+            console.log('multiplication result is:', lastCalculation);
 
-            lastCalc = Number(result).toFixed(3)
-
-            console.log('multiplication toFixed is:', lastCalc);
-
-            // package into object
-            packageCalculation.result = lastCalc;
-            packageCalculation.calcString = `${one} * ${two} = ${lastCalc}`
             break;
 
         case '/':
             // what to do if /
-            result = one / two
+            lastCalculation = one / two
+            console.log('division result is:', lastCalculation);
 
-            console.log('division result is:', result);
-
-            lastCalc = Number(result).toFixed(3)
-
-            console.log('division toFixed is:', lastCalc);
-
-            // package into object
-            packageCalculation.result = lastCalc;
-            packageCalculation.calcString = `${one} / ${two} = ${lastCalc}`
             break;
 
         default:
             // should I send a error here?
             // can I require operation selection on submission?
-            console.log('no operator selected');
-            packageCalculation.calcString = 'No operator selected'
+            alert(`unrecognized operator [${operator}] selected`);
+            // packageCalculation.calcString = 'No operator selected'
             break;
     }
+
+    // package into object
+    packageCalculation.result = lastCalculation;
+    packageCalculation.calcString = `${one} + ${two} = ${lastCalculation}`
+    
 
     // unshift object to array
     calcHistory.unshift(packageCalculation);
