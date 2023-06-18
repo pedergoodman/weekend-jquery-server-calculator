@@ -30,6 +30,8 @@ add commas to strings
 
 # remaining todo's
 
+- [] insure #'s don't go beyond 2 decimals
+
 - [x] get value to display properly
   - needed the input to be a text box 🤦🏻‍♂️
 
@@ -39,11 +41,27 @@ add commas to strings
 - [x] flash?
 
 create AC button function DELETE
-- [ ] AJAX delete client side
-- [ ] AJAx delete server side
-- [ ] logic to clear history
+- [x] AJAX delete client side
+- [x] AJAx delete server side
+- [x] logic to clear history
 
 click on an old calculation and run it again
 - [x] get click functionality working
 - [x] nab values
-- [ ] send to calculation
+- [x] send to calculation
+
+
+Button functionality
+- [] clear buttons clear input, 
+- [] 
+
+on clear
+-- clear DOM (input & total)
+-- reset variable values
+
+on submission
+-- hold everything
+-- resubmits displayed calc
+
+numbers and operators
+-- if submission has been calculated, rest values

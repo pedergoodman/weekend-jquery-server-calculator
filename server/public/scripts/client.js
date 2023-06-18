@@ -4,6 +4,7 @@ let chosenOperation = '';
 let inputOne = '';
 let inputTwo = '';
 let inputConcat = '';
+let submitted = false;
 
 function onReady() {
     console.log('jQuery loaded');
@@ -12,21 +13,24 @@ function onReady() {
     getHistory()
 
     // button listeners!
-    $('.clear-inputs').on('click', resetInputs)
+    // clear buttons
+    $('.clear-inputs').on('click', clearInputs)
     $('.clear-all').on('click', deleteHistory)
+
+    // input / submission buttons
     $('#submit-button').on('click', postCalculation)
     $('.number-btn').on('click', addToInput)
 
 
-    // "radio" button listener
+    // "radio" button listener 
     $('.operation-btn').on('click', selectOperationButton)
 
     // TODO access history data (hopefully)
     $('#display-history').on('click', '.history-list', grabHistoryValues)
 }
 
-// clicking "c" clears selected operator and input fields
-function resetInputs() {
+// AC & C clears DOM & input fields
+function clearInputs() {
     // deselects and clears value of chosenOperation
     $('.operation-btn').removeClass('active');
     // clears input variables
@@ -34,18 +38,31 @@ function resetInputs() {
     inputOne = '';
     inputTwo = '';
     inputConcat = '';
+    submitted = false;
     // clears number input value
     $('.number-input').val('')
     // clears calculated total
     $('#total').text('')
 }
 
-// TODO - all clear function 
+function resetInputValues() {
+    chosenOperation = '';
+    inputOne = '';
+    inputTwo = '';
+    inputConcat = '';
+}
+
+
 
 // TODO - add numbers to inputs!
-function addToInput() {
-    console.log('button value is:', $(this).val());
 
+
+function addToInput() {
+    // console.log('button value is:', $(this).val());
+    if (submitted) {
+        clearInputs()
+        submitted = false;
+    }
     // if operator is true, in2, in1
     if (chosenOperation) {
         // add to input2
@@ -57,10 +74,10 @@ function addToInput() {
         inputConcat = inputOne + chosenOperation;
     }
 
-    console.log('building string');
-    console.log('inputOne is:', inputOne);
-    console.log('inputTwo is:', inputTwo);
-    console.log('chosenOperation is:', chosenOperation);
+    // console.log('building string');
+    // console.log('inputOne is:', inputOne);
+    // console.log('inputTwo is:', inputTwo);
+    // console.log('chosenOperation is:', chosenOperation);
     console.log('inputConcat:', inputConcat);
 
 
@@ -70,7 +87,7 @@ function addToInput() {
 
 }
 
-// TODO checking values of list items
+// checking values of list items
 function grabHistoryValues() {
     // Check values access
     // console.log('list item clicked!');
@@ -79,7 +96,6 @@ function grabHistoryValues() {
     // console.log('saved n2:', $(this).data('saveOperation').inputTwo);
     // console.log('saved op:', $(this).data('saveOperation').operator);
     // clear results 
-    resetInputs()
 
     // set operation values
     inputOne = $(this).data('saveOperation').inputOne
@@ -99,7 +115,7 @@ function grabHistoryValues() {
 function selectOperationButton() {
     $('.operation-btn').removeClass('not-selected')
     chosenOperation = $(this).val()
-    console.log('operation is:', chosenOperation);
+    // console.log('operation is:', chosenOperation);
 
     // old functionality, keeps selected operation highlighted
     // $('.operation-btn').removeClass('active')
@@ -163,13 +179,15 @@ function postCalculation(event) {
 
             // loads history onto page 
             getHistory()
-            // resetInputs()
+            submitted = true;
 
         }).catch((alert) => {
             alert("Data wasn't sent to Server.");
             console.log("post calc #s failed.");
         })
     }
+
+    
 
 }
 
@@ -178,7 +196,7 @@ function getHistory() {
         method: 'GET',
         url: '/calc-history'
     }).then((response) => {
-        console.log('response is:', response);
+        // console.log('response is:', response);
         // send to render history
         renderHistory(response)
     }).catch((error) => {
@@ -221,17 +239,19 @@ function renderHistory(response) {
 
 // TODO delete history
 function deleteHistory() {
-    resetInputs()
-
+    
     // TODO AJAX delete history
     $.ajax({
         method: 'DELETE',
         url: '/clear-history'
     }).then((response) => {
-        renderHistory(response)
-
+        
+        getHistory()
+        clearInputs()
+        
     }).catch((error) => {
         alert('History is still here....')
         console.log('deleteHistory error is:', error);
     })
+    
 }

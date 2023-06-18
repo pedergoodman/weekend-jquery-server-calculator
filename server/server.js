@@ -43,6 +43,17 @@ app.get('/calc-history', (req, res) => {
     // console.log('sent last calc, should clear:', lastCalc);
 })
 
+app.delete('/clear-history', (req, res) => {
+    console.log('delete request made!');
+
+    // clear array 
+    calcHistory.length = 0;
+
+    res.sendStatus(201)
+})
+
+
+
 
 // Server side logic goes here!
 
