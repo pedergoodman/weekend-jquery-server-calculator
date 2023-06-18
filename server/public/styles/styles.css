@@ -40,18 +40,18 @@ button:hover {
 }
 
 /* clear all button */
-.all:hover {
+.clear-all:hover {
     background-color: var(--all-clear-hover);
 }
-.all:active {
+.clear-all:active {
     background-color: var(--all-clear);
 }
 
 /* submit button */
-#submit-button:hover, .inputs:hover {
+#submit-button:hover, .clear-inputs:hover {
     background-color: var(--submit-hover);
 }
-#submit-button:active, .inputs:active {
+#submit-button:active, .clear-inputs:active {
     background-color: var(--submit);
 }
 

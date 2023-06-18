@@ -12,39 +12,63 @@ function onReady() {
     getHistory()
 
     // button listeners!
-    $('.inputs').on('click', resetInputs)
+    $('.clear-inputs').on('click', resetInputs)
+    $('.clear-all').on('click', deleteHistory)
     $('#submit-button').on('click', postCalculation)
     $('.number-btn').on('click', addToInput)
 
-    
+
     // "radio" button listener
     $('.operation-btn').on('click', selectOperationButton)
 
-
+    // TODO access history data (hopefully)
     $('.history-list').on('click', checkValues)
 }
 
 // clicking "c" clears selected operator and input fields
 function resetInputs() {
     // deselects and clears value of chosenOperation
-    $('.operation-btn').removeClass('active')
-    chosenOperation = ''
+    $('.operation-btn').removeClass('active');
+    // clears input variables
+    chosenOperation = '';
+    inputOne = '';
+    inputTwo = '';
+    inputConcat = '';
     // clears number input value
     $('.number-input').val('')
     // clears calculated total
     $('#total').text('')
-    // 
-    // $('#operations-group').removeClass('not-selected')
-    // console.log('operation is:',chosenOperation);
 }
 
 // TODO - all clear function 
 
-// TODO
+// TODO - add numbers to inputs!
 function addToInput() {
-    // 
+    console.log('button value is:', $(this).val());
+
+    // if operator is true, in2, in1
+    if (chosenOperation) {
+        // add to input2
+        inputTwo += $(this).val();
+        inputConcat = inputOne + chosenOperation + inputTwo;
+    } else {
+        // else add to input1
+        inputOne += $(this).val();
+    }
+
+    console.log('building string');
+    console.log('inputOne is:', inputOne);
+    console.log('inputTwo is:', inputTwo);
+    console.log('chosenOperation is:', chosenOperation);
+    console.log('inputConcat:', inputConcat);
+
+
+    // TODO why wont this append right!
+    $('.number-input').val(inputConcat);
+
 }
 
+// TODO checking values of list items
 function checkValues() {
     console.log('list item clicked!');
     console.log($(this).data('saveOperation'));
@@ -57,10 +81,10 @@ function checkValues() {
 function selectOperationButton() {
     $('#operations-group').removeClass('not-selected')
     chosenOperation = $(this).val()
-    // console.log('operation is:',chosenOperation);
+    console.log('operation is:', chosenOperation);
 
-    $('.operation-btn').removeClass('active')
-    $(this).addClass('active')
+    // $('.operation-btn').removeClass('active')
+    // $(this).addClass('active')
 }
 
 
@@ -75,9 +99,11 @@ function postCalculation(event) {
         $('#operations-group').addClass('not-selected')
         console.log('Please select operator');
     } else {
-        // captured inputs 
-        let inputOne = $('.first-number').val();
-        let inputTwo = $('.second-number').val();
+        // old captured inputs and tests 
+        // let inputOne = $('.first-number').val();
+        // let inputTwo = $('.second-number').val();
+
+        // console.log('posting to server');
         // console.log('inputOne is:', inputOne);
         // console.log('inputTwo is:', inputTwo);
         // console.log('chosenOperation is:', chosenOperation);
@@ -98,6 +124,7 @@ function postCalculation(event) {
 
             // loads history onto page 
             getHistory()
+            resetInputs()
 
         }).catch((alert) => {
             alert("Data wasn't sent to Server.");
@@ -153,6 +180,11 @@ function renderHistory(response) {
 
     // would like to attach n1 & n2 to each line
     // for later calculation
-    
+
 }
 
+function deleteHistory() {
+    resetInputs()
+
+    // TODO AJAX delete history
+}
