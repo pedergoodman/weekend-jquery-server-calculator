@@ -1,25 +1,66 @@
-:root {
-    --color-four: #ade1c5;
-    --all-clear-hover: #e0a9c6;
-    
-    
+:root {    
     --background: #fbefdb;
     --submit: #3b9938;
     --submit-hover: #7fbf7d;
     --button-click: #446269;
-    --all-clear: #ad383c;
-    --all-clear-hover: #df5357;
+    --all-clear: #df5357;
+    --all-clear-hover: #e0a9c6;
     --hover: #c3d7f8;
-    /* --hover: #f8e5c4; */
 }
 
+/* GENERAL STYLING */
 body{
     background-color: var(--background);
 }
-
 h1 {
     text-align: center;
 }
+
+/* Styling an sizing */
+input {
+    font-size: 16px;
+    padding-left: 6px;
+    height: 60px;
+    border-radius: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+button {
+    padding: 7px;
+    margin: 2px;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+/* Top level div groups */
+#calc-input-form,
+#display-total,
+#display-history {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* List styling */
+ul {
+    margin: auto;
+    padding: 0px;
+}
+#display-history li {
+    list-style-type: none;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 6px;
+}
+
+/* calculation total */
+#total {
+    text-align: center;
+}
+
 
 
 
@@ -41,7 +82,7 @@ button:active {
 
 /* clear all button */
 .clear-all:hover {
-    background-color: var(--all-clear-hover);
+    background-color: var(--all-clear-hover2);
 }
 .clear-all:active {
     background-color: var(--all-clear);
@@ -62,64 +103,17 @@ button:active {
     border-radius: 30px;
     transition: box-shadow 1600ms ease-in-out;
 }
-
 .number-btn {
     transition: box-shadow 1600ms ease-in-out;
 }
-
 .not-selected {
     border: 2px transparent;
     box-shadow: inset 0px 0px 10px 0px red;
     transition: all ;
 }
+
+/* history list interaction */
 .history-list:hover {
     cursor: pointer;
-}
-
-
-/* styling an sizing */
-input {
-    font-size: 16px;
-    padding-left: 6px;
-    height: 60px;
-    border-radius: 14px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 5px;
-}
-
-button {
-    padding: 7px;
-    margin: 2px;
-    font-size: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
-
-/* top level div groups */
-#calc-input-form,
-#display-total,
-#display-history {
-    display: flex;
-    justify-content: space-around;
-}
-
-#display-history li {
-    list-style-type: none;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 6px;
-}
-
-ul {
-    margin: auto;
-    padding: 0px;
-}
-
-/* calculation total */
-#total {
-    text-align: center;
 }
 

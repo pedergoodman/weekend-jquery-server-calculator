@@ -1,5 +1,4 @@
-// calculation history array
-
+// store calculation history 
 let calcHistory = [
   
 ]
@@ -11,7 +10,7 @@ module.exports = calcHistory;
 
 
 
-/* Sample data
+/* Sample data 
 {
   inputOne: 4,
   inputTwo: 5,

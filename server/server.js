@@ -7,18 +7,18 @@ const PORT = 5000;
 app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Global variables
+// server-side global variables
 const calcHistory = require('./modules/history')
 let lastCalculation = '';
 
 
-// GET, POST, DELETE routes go here!!
-// POST route for input data
+// ROUTES
+
+// POST route to capture input calculation data
 app.post('/send-calc', (req, res) => {
     // console.log(req.body.calcInputData);
-    // console.log(req.body.calcInputData.inputOne);
-    // console.log(req.body.calcInputData.inputTwo);
-    // console.log(req.body.calcInputData.chosenOperation);
+
+    // separate out data
     let inputOne = Number(req.body.calcInputData.inputOne)
     let inputTwo = Number(req.body.calcInputData.inputTwo)
     let chosenOperation = req.body.calcInputData.chosenOperation
@@ -29,25 +29,27 @@ app.post('/send-calc', (req, res) => {
     res.sendStatus(201)
 })
 
+// GET route to send calcHistory and lastCalculation to client
 app.get('/calc-history', (req, res) => {
-     console.log('GetHistory request made.');
+    //  console.log('GetHistory request made.');
 
+    // packaged data for client
     let package = {
         history: calcHistory,
         lastCalculation: lastCalculation
     }
     console.log('sending last calc:', lastCalculation);
 
+    // send data to client 
     res.send(package);
-    // reset lastCalc
+
+    // reset lastCalculation to empty
     lastCalculation = '';
-    // console.log('sent last calc, should clear:', lastCalc);
 })
 
-
-// clear
+// DELETE route to clear calcHistory
 app.delete('/clear-history', (req, res) => {
-    console.log('delete request made!');
+    // console.log('delete request made!');
 
     // clear array 
     calcHistory.length = 0;
@@ -57,20 +59,16 @@ app.delete('/clear-history', (req, res) => {
 
 
 
-
-// Server side logic goes here!
+// SERVER LOGIC
 
 // calculateNumbers(inputOne, inputTwo)
 function calculateNumbers(one, two, operation) {
+    // console.log('made it to calculateNumbers!');
+    // console.log('inputOne is:', one);
+    // console.log('inputTwo is:', two);
+    // console.log('operation is:', operation);
 
-    console.log('made it to calculateNumbers!');
-    console.log('inputOne is:', one);
-    console.log('inputTwo is:', two);
-    console.log('operation is:', operation);
-    
-    let operator = operation;
-
-
+    // for building object to add to calcHistory
     let packageCalculation = {
         inputOne: 0,
         inputTwo: 0,
@@ -79,45 +77,28 @@ function calculateNumbers(one, two, operation) {
         result: 0,
     }
 
-    // grabs inputs and places in array object
+    // put initial inputs in array object
     packageCalculation.inputOne = one;
     packageCalculation.inputTwo = two;
     packageCalculation.operator = operation;
 
     // switch calculation dependent on chosenOperation
-    switch (operator) {
+    switch (operation) {
         case '+':
-            // what to do if +
             lastCalculation = one + two;
-            
             break;
-
         case '-':
-            // what to do if -
             lastCalculation = one - two
-
             break;
-
         case '*':
-            // what to do if *
             lastCalculation = one * two
-
-            console.log('multiplication result is:', lastCalculation);
-
             break;
-
         case '/':
-            // what to do if /
             lastCalculation = one / two
-            console.log('division result is:', lastCalculation);
-
             break;
-
         default:
-            // should I send a error here?
-            // can I require operation selection on submission?
+            // just in case, no operator error
             alert(`unrecognized operator [${operator}] selected`);
-            // packageCalculation.calcString = 'No operator selected'
             break;
     }
 
@@ -135,11 +116,7 @@ function calculateNumbers(one, two, operation) {
 
 
 
-
-
-
-
-// turn on the engine 
+// turn on the server 
 app.listen(PORT, () => {
     console.log('Server running on port:', PORT);
 })

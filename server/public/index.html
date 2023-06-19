@@ -12,9 +12,9 @@
 
 <body>
     <h1>Server Side Calculator</h1>
+    <!-- Calculator buttons and input form -->
     <div id="calc-input-form">
         <form action="">
-            <!-- <input class="number-input first-number" type="number" placeholder="input1" value="test"> -->
             <div class="calc-block first-row">
                 <input id="number-input-values" class="number-input second-number" type="text" placeholder="input2" value="" readonly>
                 <button class="clear-btn clear-all" type="button">AC</button>
@@ -41,14 +41,16 @@
             <div class="calc-block fifth-row">
                 <button class="number-btn" type="button" value="0">0</button>
                 <button class="number-btn" type="button" value=".">.</button>
-                <button id="submit-button" type="submit">=</button>
+                <button id="submit-button" type="button">=</button>
                 <button id="division" class="operation-btn" type="button" value='/'>/</button>
             </div>
         </form>
     </div>
+    <!-- Calculation total display -->
     <div  id="display-total">
         <h2 id="total"></h2>
     </div>
+    <!-- Display history list -->
     <div id="display-history">
         <ul>
             <!-- history will populate here -->

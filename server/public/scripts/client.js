@@ -1,5 +1,6 @@
 $(document).ready(onReady);
 
+// global variables for 
 let chosenOperation = '';
 let inputOne = '';
 let inputTwo = '';
@@ -12,20 +13,15 @@ function onReady() {
     // loads history onto page 
     getHistory()
 
-    // button listeners!
-    // clear buttons
+    // Button listeners!
     $('.clear-inputs').on('click', clearInputs)
     $('.clear-all').on('click', deleteHistory)
 
-    // input / submission buttons
-    $('#submit-button').on('click', postCalculation)
     $('.number-btn').on('click', addToInput)
-
-
-    // "radio" button listener 
+    $('#submit-button').on('click', postCalculation)
     $('.operation-btn').on('click', selectOperationButton)
 
-    // TODO access history data (hopefully)
+    // access history data values
     $('#display-history').on('click', '.history-list', grabHistoryValues)
 }
 
@@ -45,27 +41,19 @@ function clearInputs() {
     $('#total').text('')
 }
 
-function resetInputValues() {
-    chosenOperation = '';
-    inputOne = '';
-    inputTwo = '';
-    inputConcat = '';
-}
-
-
-
-// TODO - add numbers to inputs!
-
-
+// Adds numbers to inputs
 function addToInput() {
     // console.log('button value is:', $(this).val());
+
+    // If a submission has been made previously, clear the inputs first
     if (submitted) {
         clearInputs()
         submitted = false;
     }
-    // if operator is true, in2, in1
+
+    // if operator is true put in in2, otherwise put in in1
     if (chosenOperation) {
-        // add to input2
+        // add to input2 if an operator has been selected
         inputTwo += $(this).val();
         inputConcat = inputOne + chosenOperation + inputTwo;
     } else {
@@ -110,54 +98,54 @@ function grabHistoryValues() {
 
 }
 
-// toggles selected operation
-// both value to be passed & highligh on DOM
+// toggles selected operation, both value to be passed & highligh on DOM
 function selectOperationButton() {
     $('.operation-btn').removeClass('not-selected')
     chosenOperation = $(this).val()
     // console.log('operation is:', chosenOperation);
 
-    // old functionality, keeps selected operation highlighted
-    // $('.operation-btn').removeClass('active')
-    // $(this).addClass('active')
+    // keeps selected operation highlighted
+    $('.operation-btn').removeClass('active')
+    $(this).addClass('active')
 
     inputConcat = inputOne + chosenOperation + inputTwo;
     $('.number-input').val(inputConcat);
 }
 
 // GET & POST routes
+
+// check if input is ready to post to server
 function checkReadyToCalculate() {
     if (chosenOperation === '') {
-        // flash operation buttons
+        // flash operation buttons if chosenOperation is empty
         $('.operation-btn').addClass('not-selected')
         setTimeout(() => {
             $('.operation-btn').removeClass('not-selected')
         }, "100")
-        // console.log('Please select operator');
+
         return false;
+
     } else if (inputTwo === '') {
+        // flash input buttons if input2 is empty
         $('.number-btn').addClass('not-selected')
         setTimeout(() => {
             $('.number-btn').removeClass('not-selected')
         }, "100")
-        console.log('Please select second operand');
+
+        // console.log('Please select second operand');
         return false;
     } else {
+        // let postCalculation run
         return true;
     }
 
 }
 
-
 // sends submitted calculation and operator to server.
-function postCalculation(event) {
-    event.preventDefault()
+function postCalculation() {
 
+    // check if inputs are ready
     if (checkReadyToCalculate()) {
-        // tests & old captured inputs 
-        // let inputOne = $('.first-number').val();
-        // let inputTwo = $('.second-number').val();
-
         // console.log('posting to server');
         // console.log('inputOne is:', inputOne);
         // console.log('inputTwo is:', inputTwo);
@@ -179,6 +167,7 @@ function postCalculation(event) {
 
             // loads history onto page 
             getHistory()
+            // saves submission status, so we can recalculate last calculation
             submitted = true;
 
         }).catch((alert) => {
@@ -191,12 +180,14 @@ function postCalculation(event) {
 
 }
 
+// get getHistory array from server
 function getHistory() {
     $.ajax({
         method: 'GET',
         url: '/calc-history'
     }).then((response) => {
         // console.log('response is:', response);
+
         // send to render history
         renderHistory(response)
     }).catch((error) => {
@@ -205,35 +196,30 @@ function getHistory() {
     })
 }
 
+// builds string do display result
 function buildResultString(response) {
-    
-
-    
     return `${response.inputOne} ${response.operator} ${response.inputTwo} = ${stringifyNumber(response.result)}`
 }
 
+// rounds decimals to nearest thousandth & cuts off trailing 0's
 function stringifyNumber(num) {
-    console.log('stringifyNumber is:', num);
-
+    // console.log('stringifyNumber is:', num);
     return Number(num).toFixed(3).replace(/\.?0+$/, '');
 }
 
+// renders calcHistory to DOM, stores calculation data in element
 function renderHistory(response) {
-    // console.log(response);
-    console.log('in renderHistory!');
-    console.log('history is:', response.history);
-    console.log('lastCalculation is:', response.lastCalculation);
-    console.log('response.length is:', response.history.length);
+    // console.log('in renderHistory!');
+    // console.log('history is:', response.history);
+    // console.log('lastCalculation is:', response.lastCalculation);
+    // console.log('response.length is:', response.history.length);
     
-
-    // \.0+$/, ''
-    // displays latest calc on DOM
-    // runs only if there is history
+    // displays latest calc on DOM, & runs only if there is history
     if (response.history.length > 0 && response.lastCalculation) {
         $('#total').text(stringifyNumber(response.lastCalculation));
     };
 
-    // clears history display
+    // empty's history display before rendering to DOM
     $('#display-history ul').empty();
 
     // renders calcHistory to DOM
@@ -242,7 +228,7 @@ function renderHistory(response) {
         $('#display-history ul').append(`
             <li class="history-list">${buildResultString(historyObject)}</li>
         `);
-        // testing right now, should store operation in the DOM element
+        // stores operation details in the DOM element!
         // also will attach it every time the page refreshes!
         $('#display-history li').last().data('saveOperation', {
             inputOne: historyObject.inputOne,
@@ -253,15 +239,16 @@ function renderHistory(response) {
 
 };
 
-// TODO delete history
+
+// deletes history on server
 function deleteHistory() {
 
-    // TODO AJAX delete history
     $.ajax({
         method: 'DELETE',
         url: '/clear-history'
     }).then((response) => {
 
+        // reload history data to DOM (empty's DOM)
         getHistory()
         clearInputs()
 
